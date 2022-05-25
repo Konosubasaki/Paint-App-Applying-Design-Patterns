@@ -1,0 +1,17 @@
+package command;
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+ 
+
+public interface Command {
+	public void setModel(DrawingModel model);
+	
+	public void setController(DrawingController controller);
+	
+	public String execute();
+	
+	public String unexecute();
+
+	public Shape getShape();
+}

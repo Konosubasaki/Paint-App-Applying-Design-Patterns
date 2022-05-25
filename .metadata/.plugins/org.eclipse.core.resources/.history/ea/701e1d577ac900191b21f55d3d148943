@@ -1,0 +1,24 @@
+package shapes;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+abstract class Shape {
+	
+	private Color border;
+	private boolean isSelected = false;
+
+	abstract public void draw(Graphics g);
+
+	abstract public boolean contains(int x, int y);
+
+
+	abstract public void selected(Graphics g);
+
+	abstract public String toString();
+
+	abstract public boolean getIsSelected();
+
+	abstract public void setIsSelected(boolean b);
+
+}

@@ -1,0 +1,20 @@
+package shapes;
+
+import java.awt.Graphics;
+
+public interface Shape {
+
+	public void draw(Graphics g);
+
+	public boolean contains(int x, int y);
+
+//
+	public void selected(Graphics g);
+
+	public String toString();
+
+	public boolean getIsSelected();
+
+	public void setIsSelected(boolean b);
+
+}

@@ -1,0 +1,74 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Edit implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape originalState;
+	private Shape editedState;
+
+	public Edit(Shape s, Shape editedState) {
+		this.model = model;
+		this.originalState = s;
+		this.editedState = editedState;
+	}
+	public Edit() {
+		// TODO Auto-generated constructor stub
+	}
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+	public Shape getShape()
+	{
+		return originalState;
+	}
+	
+
+	public String execute() {// uzmi indeks od original stanja i umetni na taj indeks editovano stanje
+		originalState.setIsSelected(false);
+		editedState.setIsSelected(true);
+
+		model.getAll().set(model.getIndex(originalState), editedState);
+		System.out.println(logText());
+		return logText();
+	}
+
+	public String unexecute() {
+		originalState.setIsSelected(true);
+		editedState.setIsSelected(false);
+		
+
+		model.getAll().set(model.getIndex(editedState), originalState);
+		return logText();
+
+	}
+
+	public String logText() {
+		return "Edited " + originalState.toString() + " To " + editedState.toString();
+
+	}
+
+
+	public void setOriginalState(Shape originalState) {
+		this.originalState = originalState;
+	}
+	public void setEditedState(Shape editedState) {
+		this.editedState = editedState;
+	}
+	public Command clone()
+	{
+		Edit cc= new Edit();
+		cc.setModel(this.model);
+		cc.setOriginalState(this.originalState );
+		cc.setEditedState(this.editedState);
+		return cc;
+		
+	}
+
+}

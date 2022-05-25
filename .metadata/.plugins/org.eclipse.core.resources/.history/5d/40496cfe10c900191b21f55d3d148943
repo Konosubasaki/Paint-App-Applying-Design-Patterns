@@ -1,0 +1,70 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Unselect implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape s;
+
+	public Unselect(DrawingModel model, Shape s) {
+		this.model = model;
+		this.s = s;
+	}
+	
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+	public Shape getShape()
+	{
+		return s;
+	}
+	
+	public void setShape(Shape s)
+	{
+		this.s=s;
+	}
+	
+
+	public String execute() {
+		s.setIsSelected(false);
+		System.out.println(logText());
+		return logText();
+
+	}
+
+	public String unexecute() {
+		s.setIsSelected(true);
+		System.out.println(logText());
+		return logText();
+
+	}
+
+	public String logText() {
+		return "Deselected " + s.toString();
+
+	}
+
+	@Override
+	public void setController(DrawingController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public Command clone()
+	{
+		Unselect cc= new Unselect();
+		cc.setModel(this.model);
+		cc.setShape(this.s);
+		
+		return cc;
+		
+	}
+
+}

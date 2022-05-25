@@ -1,0 +1,14 @@
+package mvc;
+
+import javax.swing.JPanel;
+
+public class DrawingView extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public DrawingView() {
+
+	}
+
+}

@@ -1,0 +1,19 @@
+package shapes;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.Serializable;
+
+class Point extends Shape  {
+	private int x;
+	private int y;
+
+	public Point(int x, int y, Color border) {
+		this.x = x;
+		this.y = y;
+		this.border = border;
+	}
+
+
+
+}

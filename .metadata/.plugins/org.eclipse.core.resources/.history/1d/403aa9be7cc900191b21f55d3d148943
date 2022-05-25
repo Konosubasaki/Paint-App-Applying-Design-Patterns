@@ -1,0 +1,17 @@
+package shapes;
+
+import java.awt.Color;
+
+abstract class AreaShape extends Shape{
+	
+	public AreaShape(Color border, boolean b, Color inner) {
+		super(border, b);
+		this.inner=inner;
+		// TODO Auto-generated constructor stub
+	}
+
+	private Color inner;
+	
+	
+
+}

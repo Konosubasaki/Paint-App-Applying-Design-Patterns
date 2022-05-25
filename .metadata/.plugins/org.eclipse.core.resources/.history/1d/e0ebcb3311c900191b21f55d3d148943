@@ -1,0 +1,55 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Select implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape s;
+
+	public Select(DrawingModel model, Shape s) {
+		this.model = model;
+		this.s = s;
+	}
+	
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+
+	public Shape getShape()
+	{
+		return s;
+	}
+	
+	
+	public String execute() {
+		s.setIsSelected(true);
+		System.out.println(logText());
+		return logText();
+
+	}
+
+	public String unexecute() {
+		s.setIsSelected(false);
+		System.out.println(logText());
+		return logText();
+	}
+
+	public String logText() {
+		return "Selected " + s.toString();
+
+	}
+
+	@Override
+	public void setController(DrawingController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

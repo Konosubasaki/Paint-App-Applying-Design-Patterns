@@ -1,0 +1,91 @@
+package shapes;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.Serializable;
+
+public class Square extends AreaShape  implements Serializable {
+
+	private Point upLeft;
+	private int a;
+
+	public Square(Point upLeft, int a, Color border, Color inner) {
+		this.upLeft = upLeft;
+		this.a = a;
+		this.inner = inner;
+		this.border = border;
+	}
+
+
+	public boolean getIsSelected() {
+		return super.getIsSel();
+	}
+
+	public void setIsSelected(boolean b) {
+		super.setIsSel(b);
+	}
+	
+	public Color getBorder() {
+		return super.getBorder();
+	}
+
+	public void setBorder(Color border) {
+		super.setBorder(border);
+	}
+	public Color getInner() {
+		return super.getInner();
+	}
+
+	public void getInner(Color border) {
+		super.setInner(border);
+	}
+	
+	public Point getUpLeft() {
+		return upLeft;
+	}
+
+	public void setUpLeft(Point upLeft) {
+		this.upLeft = upLeft;
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	public void draw(Graphics g) {
+		g.setColor(border);
+		g.drawRect(upLeft.getX(), upLeft.getY(), a, a);
+
+		g.setColor(inner);
+		g.fillRect(upLeft.getX() + 1, upLeft.getY() + 1, a - 1, a - 1);
+
+		if (isSelected == true)
+			selected(g);
+	}
+
+	public boolean contains(int x, int y) {
+		return (upLeft.getX() <= x && x <= (upLeft.getX() + a) && upLeft.getY() <= y && y <= (upLeft.getY() + a));
+	}
+
+	public void selected(Graphics g) {
+		g.setColor(Color.BLUE);
+		upLeft.selected(g);
+		new Point(upLeft.getX() + a, upLeft.getY() + a).selected(g);
+		new Line(new Point(upLeft.getX() + a, upLeft.getY()), new Point(upLeft.getX(), upLeft.getY() + a)).selected(g);
+
+	}
+
+	public String toString() {
+		String log = "Square X:" + upLeft.getX() + " Y:" + upLeft.getY() + " A:" + a + " border " + "#"
+				+ Integer.toHexString(getBorder().getRGB()).substring(2) + " inner " + "#"
+				+ Integer.toHexString(getInner().getRGB()).substring(2);
+		// System.out.println(log);
+		return log;
+
+	}
+
+}

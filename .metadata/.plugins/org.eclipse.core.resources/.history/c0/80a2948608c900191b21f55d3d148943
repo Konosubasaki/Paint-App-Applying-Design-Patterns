@@ -1,0 +1,164 @@
+package strategy;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import command.AddShape;
+import command.Command;
+import hexagon.HexagonAdapter;
+import shapes.Circle;
+import shapes.Line;
+import shapes.Point;
+import shapes.Rectangle;
+import shapes.Square;
+
+public class LoggingFile implements Logging {
+
+	@Override
+	public void createLog(ArrayList<Command> commands, String string,File file) {
+		// TODO Auto-generated method stub
+		//path = "\"C:\\\\Users\\\\h\\\\Desktop\\\\abc.log\" + name + ".txt";
+
+		try {
+
+		    if (!file.exists()) {
+
+		        file.createNewFile();
+		    }
+
+		    FileWriter fw = new FileWriter(file, true);
+		    BufferedWriter bw = new BufferedWriter(fw);
+
+		    bw.write(string);
+		    bw.close();
+		    fw.close();
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+//		    
+//		    
+//		    
+//	        System.out.println("KRECE LOG");
+//	        
+//	        
+//
+//		    FileReader fr = new FileReader(file);
+//
+//		    BufferedReader br = new BufferedReader(fr);
+//
+//		    fw = new FileWriter(file, true);
+//
+//		    bw = new BufferedWriter(fw);
+//
+//		    while (br.ready()) {
+//
+//		        String line = br.readLine();
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        if (splitInput[0].equals("Added")) {
+//					if (splitInput[2].equals("Point:")) {
+//
+//						Point p = pointFromString(splitInput);
+//						cmd = new AddShape(model, p);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + p.toString());
+//					} else if (splitInput[2].equals("Line:")) {
+//
+//						Line l = lineFromString(splitInput);
+//						cmd = new AddShape(model, l);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + l.toString());
+//
+//					} else if (splitInput[2].equals("Square:")) {
+//
+//						Square s = squareFromString(splitInput);
+//						cmd = new AddShape(model, s);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + s.toString());
+//					} else if (splitInput[2].equals("Rectangle:")) {
+//
+//						Rectangle r = rectangleFromString(splitInput);
+//
+//						cmd = new AddShape(model, r);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + r.toString());
+//					} else if (splitInput[2].equals("Circle:")) {
+//
+//						Circle c = circleFromString(splitInput);
+//						cmd = new AddShape(model, c);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + c.toString());
+//					} else if (splitInput[2].equals("Hexagon:")) {
+//
+//						HexagonAdapter h = hexagonFromString(splitInput);
+//						cmd = new AddShape(model, h);
+//						cmd.execute();
+//						undo.push(cmd);
+//						frame.getDlmList().add(0, "Added => " + h.toString());
+//					}
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//		        
+//
+//		        System.out.println(line);
+//
+//		        bw.write(line);
+//		        bw.newLine();
+//
+//		    }
+//		    br.close();
+//		    fr.close();
+//
+//		} catch (IOException ex) {
+//		    ex.printStackTrace();
+//		}
+//		
+	}
+	
+	
+	
+
+}

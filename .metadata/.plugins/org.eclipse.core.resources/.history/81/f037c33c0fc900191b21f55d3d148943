@@ -1,0 +1,52 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Delete implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape s;
+
+	public Delete(DrawingModel model, Shape s) {
+		this.model = model;
+		this.s = s;
+	}
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+	public Shape getShape()
+	{
+		return s;
+	}
+	
+	public String execute() {
+
+		System.out.println(logText());
+		return logText();
+
+	}
+
+	public String unexecute() {
+		model.getAll().add(s);
+		System.out.println(logText());
+		return logText();
+
+	}
+
+	public String logText() {
+		return "Deleted " + s.toString();
+
+	}
+	@Override
+	public void setController(DrawingController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

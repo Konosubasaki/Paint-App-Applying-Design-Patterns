@@ -1,0 +1,63 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Edit implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape originalState;
+	private Shape oldState;
+	private Shape newState;
+
+
+	public Edit(DrawingModel model, Shape oldState, Shape newState) {
+		this.originalState = oldState.clone();
+		this.oldState=oldState;
+		this.newState=newState;
+		
+		
+	}
+	public Edit() {
+		// TODO Auto-generated constructor stub
+	}
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+	
+
+	public void execute() {// uzmi indeks od original stanja i umetni na taj indeks editovano stanje
+		
+		Shape copy=originalState.clone();
+		originalState=editedState;
+		originalState.setIsSelected(true);
+		
+		editedState=copy;
+		System.out.println(logText());
+		
+	}
+
+	public void unexecute() {
+		
+		execute();		
+		
+		
+		System.out.println(logText());
+
+	}
+
+	public String logText() {
+		return "Edited " + editedState.toString() + " To " + originalState.toString();
+
+	}
+
+
+
+
+ 
+}

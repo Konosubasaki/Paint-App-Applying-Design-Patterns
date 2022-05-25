@@ -1,0 +1,14 @@
+package mvc;
+
+import javax.swing.JPanel;
+
+public class ShapesView extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public ShapesView() {
+
+	}
+
+}

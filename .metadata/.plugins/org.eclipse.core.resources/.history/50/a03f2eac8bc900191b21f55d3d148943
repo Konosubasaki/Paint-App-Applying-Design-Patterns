@@ -1,0 +1,96 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class UndoRedo implements Command, Serializable {
+
+	transient private DrawingModel model;
+	transient private DrawingController controller;
+	private Shape s;
+	private boolean isItRedo;
+
+	public Shape getS() {
+		return s;
+	}
+
+	public void setS(Shape s) {
+		this.s = s;
+	}
+
+	public void setItRedo(boolean isItRedo) {
+		this.isItRedo = isItRedo;
+	}
+
+	public UndoRedo(DrawingModel model, Shape s, DrawingController controller) {
+		this.model = model;
+		this.s = s;
+		this.controller = controller;
+		isItRedo=false;
+	}
+	
+	public UndoRedo() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+
+	}
+
+	// Undo command
+	// ovo sto ispisuje undo i redo treba narediti da loguje u glavnu listu
+	// stringova
+	public String execute() {
+		
+		if (isItRedo==true)
+			return unexecute();
+		else {
+		String ret= "UNDO " +controller.getLastCommand().unexecute();
+		System.out.println(ret);
+		controller.addUndoRedoCommands(controller.getLastCommand().clone());
+		controller.deleteLastCommand();
+		return ret;
+		}
+		// prebaci u drugu listu i obrisi u command listi
+
+	}
+
+	// Redo command
+	public String unexecute() {
+
+
+		String ret= "REDO " + controller.getLastUndoRedoCommand().execute();
+		System.out.println(ret);
+		controller.addCommands(controller.getLastUndoRedoCommand().clone());
+		controller.deleteLastUndoRedoCommands();
+		isItRedo=true;
+		return ret;
+
+		// sve dok nije prazna lista
+
+	}
+	
+	public Shape getShape()
+	{
+		return s;
+	}
+
+
+	public Command clone()
+	{
+		UndoRedo cc= new UndoRedo();
+		cc.setModel(this.model);
+		cc.setS(this.s);
+		cc.setController(this.controller);
+		cc.setItRedo(this.isItRedo);
+		
+		return cc;
+		
+	}
+
+}

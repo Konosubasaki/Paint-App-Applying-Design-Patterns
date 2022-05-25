@@ -1,0 +1,125 @@
+package adapter;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.io.Serializable;
+
+import hexagon.Hexagon;
+import shapes.AreaShape;
+import shapes.Circle;
+import shapes.Point;
+import shapes.Shape;
+
+public class HexagonAdapter extends AreaShape implements Serializable {
+
+	private Hexagon hex;
+	private Point upLeft;
+
+	public HexagonAdapter(Point upLeft, int r, Color border, Color inner) {
+		super(border,false,inner);
+		this.hex = new Hexagon(upLeft.getX(), upLeft.getY(), r);
+		hex.setAreaColor(super.getInner());
+		hex.setBorderColor(super.getBorder());
+		this.setUpLeft(upLeft);
+
+	}
+
+	public HexagonAdapter() {
+		// TODO Auto-generated constructor stub
+		super(Color.BLACK,false,Color.BLACK);
+
+	}
+
+	public int getR() {
+		return hex.getR();
+	}
+
+	public void setR(int r) {
+		hex.setR(r);
+	}
+	@Override
+	public Color getInner() {
+		return hex.getAreaColor();
+	}
+	@Override
+	public void setInner(Color inner) {
+		hex.setAreaColor(inner);
+		super.setInner(inner);
+	}
+	@Override
+	public Color getBorder() {
+		return hex.getBorderColor();
+	}
+	@Override
+	public void setBorder(Color border) {
+		hex.setBorderColor(border);
+		super.setBorder(border);
+	}
+
+	@Override
+	public boolean getIsSelected() {
+		return hex.isSelected();
+	}
+
+	@Override
+	public void setIsSelected(boolean b) {
+		hex.setSelected(b);
+		super.setIsSelected(b);
+	
+	}
+
+	
+	@Override
+	public void draw(Graphics g) {
+		hex.paint(g);
+
+		if (hex.isSelected() == true)
+			hex.setSelected(true);
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+
+		return hex.doesContain(x, y);
+	}
+
+	@Override
+	public void selected(Graphics g) {
+		hex.setSelected(true);
+		//metoda koja selektuje hex, nema impl jer sam je uzela iz jar
+
+	}
+
+	public String toString() {
+		String log = "Hexagon X:" + hex.getX() + " Y:" + hex.getY() + " r:" + hex.getR() + " border " + "#"
+				+ Integer.toHexString(getBorder().getRGB()).substring(2) + " inner " + "#"
+				+ Integer.toHexString(getInner().getRGB()).substring(2);
+		// System.out.println(log);
+		return log;
+
+	}
+
+	public Point getUpLeft() {
+		return upLeft;
+	}
+
+	public void setUpLeft(Point upLeft) {
+		this.upLeft = upLeft;
+		hex.setX(upLeft.getX());
+		hex.setY(upLeft.getY());
+	}
+
+	@Override
+	public Shape clone() {
+		// TODO Auto-generated method stub
+		HexagonAdapter c=new HexagonAdapter();
+		c.setBorder(this.getBorder());
+		c.setInner(this.getInner());
+		c.setIsSelected(this.getIsSelected());
+		c.setR(this.getR());
+		c.setUpLeft(this.getUpLeft());
+		return c;	
+		}
+
+
+}

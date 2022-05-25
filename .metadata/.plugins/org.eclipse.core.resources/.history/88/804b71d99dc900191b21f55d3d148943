@@ -1,0 +1,154 @@
+package command;
+
+import java.io.Serializable;
+
+import adapter.HexagonAdapter;
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Circle;
+import shapes.Line;
+import shapes.Point;
+import shapes.Rectangle;
+import shapes.Shape;
+import shapes.Square;
+
+public class Edit implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape originalState;
+	private Shape oldState;
+	private Shape newState;
+
+
+	public Edit(DrawingModel model, Shape oldState, Shape newState) {
+		originalState = oldState.clone();
+		
+		if (oldState instanceof Point)
+		{
+			int x=((Point)newState).getX();
+			int y=((Point)newState).getY();
+			
+			((Point) oldState).setX(x);
+			((Point) oldState).setY(y);
+			
+			
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+			
+		}
+		
+		else if (oldState instanceof Line)
+		{
+			Point s=((Line)newState).getStart();
+			Point e=((Line)newState).getEnd();
+			
+			((Line) oldState).setStart(s);
+			((Line) oldState).setEnd(e);
+			
+			
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+			
+		}
+		else if (oldState instanceof Circle)
+		{
+			
+			
+			
+			((Point) oldState).setX(x);
+			((Point) oldState).setY(y);
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+		}
+		else if (oldState instanceof Rectangle)
+		{
+			
+			
+			((Point) oldState).setX(x);
+			((Point) oldState).setY(y);
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+		}
+		else if (oldState instanceof Square)
+		{
+		
+			
+			((Point) oldState).setX(x);
+			((Point) oldState).setY(y);
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+		}
+		else if (oldState instanceof HexagonAdapter)
+		{
+		
+			
+			
+			((Point) oldState).setX(x);
+			((Point) oldState).setY(y);
+			oldState.setBorder(newState.getBorder());
+			oldState.setIsSel(newState.getIsSel());
+		}
+		
+		this.oldState=oldState;
+		this.newState=newState;
+		
+		
+	}
+	public Edit() {
+		// TODO Auto-generated constructor stub
+	}
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+	
+
+	public Shape getOriginalState() {
+		return originalState;
+	}
+	public void setOriginalState(Shape originalState) {
+		this.originalState = originalState;
+	}
+	public Shape getOldState() {
+		return oldState;
+	}
+	public void setOldState(Shape oldState) {
+		this.oldState = oldState;
+	}
+	public Shape getNewState() {
+		return newState;
+	}
+	public void setNewState(Shape newState) {
+		this.newState = newState;
+	}
+	public void execute() {// uzmi indeks od original stanja i umetni na taj indeks editovano stanje
+		
+		Shape copy=originalState.clone();
+		originalState=editedState;
+		originalState.setIsSelected(true);
+		
+		editedState=copy;
+		System.out.println(logText());
+		
+	}
+
+	public void unexecute() {
+		
+		execute();		
+		
+		
+		System.out.println(logText());
+
+	}
+
+	public String logText() {
+		return "Edited " + editedState.toString() + " To " + originalState.toString();
+
+	}
+
+
+
+
+ 
+}

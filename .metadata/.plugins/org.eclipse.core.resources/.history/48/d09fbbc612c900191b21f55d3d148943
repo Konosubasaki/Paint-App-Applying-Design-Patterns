@@ -1,0 +1,62 @@
+package command;
+
+import java.io.Serializable;
+
+import mvc.DrawingController;
+import mvc.DrawingModel;
+import shapes.Shape;
+
+public class Next implements Command, Serializable {
+
+	transient private DrawingModel model;
+	private Shape s;
+
+	public Next(DrawingModel model, Shape s) {
+		this.model = model;
+		this.s = s;
+	}
+	
+	public Next() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setModel(DrawingModel model)
+	{
+		this.model=model;
+	}
+
+	public Shape getShape()
+	{
+		return s;
+	}
+	
+
+	public String execute() {
+		return "";
+	}
+
+	public String unexecute() {
+		return "";
+	}
+
+	@Override
+	public void setController(DrawingController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setShape(Shape s)
+	{
+		this.s=s;
+	}
+	
+	public Command clone()
+	{
+		Next cc= new Next();
+		cc.setModel(this.model);
+		cc.setShape(this.s);
+		
+		return cc;
+		
+	}
+
+}
